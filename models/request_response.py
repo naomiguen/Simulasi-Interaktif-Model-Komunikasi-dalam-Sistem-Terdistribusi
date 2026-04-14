@@ -24,10 +24,7 @@ class Response:
 
 
 class Server:
-    """
-    Komponen Server dalam model Request-Response.
-    Menerima request, memprosesnya, dan mengembalikan response.
-    """
+    # Menerima request, memprosesnya, dan mengembalikan response.
     def __init__(self, name: str, error_rate: float = 0.2):
         self.name = name
         self.error_rate = error_rate       
@@ -36,10 +33,6 @@ class Server:
         self.log: list[str] = []
 
     def handle_request(self, request: Request, latency_ms: float = 500) -> Response:
-        """
-        Memproses request dari client.
-        Mensimulasikan pemrosesan dengan sleep sesuai latency.
-        """
         self.requests_received += 1
         self.log.append(f"[SERVER {self.name}] Menerima request#{request.request_id} dari {request.sender}")
 
@@ -69,10 +62,6 @@ class Server:
 
 
 class Client:
-    """
-    Komponen Client dalam model Request-Response.
-    Mengirim request dan menunggu response (blocking).
-    """
     def __init__(self, name: str):
         self.name = name
         self.request_count = 0
@@ -82,10 +71,6 @@ class Client:
         self.log: list[str] = []
 
     def send_request(self, server: Server, payload: str, latency_ms: float = 500) -> Response:
-        """
-        Mengirim request ke server dan menunggu response.
-        Ini adalah operasi SINKRON, client diblokir sampai response tiba.
-        """
         self.request_count += 1
         req_id = f"REQ-{self.request_count:04d}"
 

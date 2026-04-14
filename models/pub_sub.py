@@ -40,10 +40,7 @@ class Broker:
         self.log.append(f"[BROKER] {subscriber_name} unsubscribe dari topic '{topic}'")
 
     def publish(self, message: Message):
-        """
-        Terima pesan dari publisher dan distribusikan ke semua subscriber.
-        Pengiriman ke tiap subscriber dilakukan di thread terpisah (asinkron).
-        """
+        #Terima pesan dari publisher dan distribusikan ke semua subscriber. Pengiriman ke tiap subscriber dilakukan di thread terpisah (asinkron).
         with self.lock:
             subscribers = list(self._subscriptions.get(message.topic, []))
 

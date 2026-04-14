@@ -24,10 +24,6 @@ class NodeStatus(Enum):
 
 @dataclass
 class SystemNode:
-    """
-    Komponen dasar sistem terdistribusi.
-    Setiap entitas (client, server, broker, dll) direpresentasikan sebagai SystemNode.
-    """
     node_id:    str
     name:       str
     node_type:  NodeType
@@ -75,10 +71,6 @@ class SystemNode:
 
 @dataclass
 class Packet:
-    """
-    Unit data yang bergerak antar komponen — dipakai untuk ANIMASI di canvas.
-    Menyimpan posisi saat ini, asal, tujuan, dan progress perjalanan.
-    """
     packet_id:  str
     src_node:   SystemNode
     dst_node:   SystemNode
@@ -98,7 +90,7 @@ class Packet:
     is_return:  bool = False      # True jika ini paket response/return
 
     def update_position(self):
-        """Hitung posisi saat ini berdasarkan progress (interpolasi linear)."""
+        #Hitung posisi saat ini berdasarkan progress (interpolasi linear)
         self.progress = min(1.0, self.progress + self.speed)
         self.current_x = self.src_node.canvas_x + (self.dst_node.canvas_x - self.src_node.canvas_x) * self.progress
         self.current_y = self.src_node.canvas_y + (self.dst_node.canvas_y - self.src_node.canvas_y) * self.progress
